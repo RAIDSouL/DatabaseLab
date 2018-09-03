@@ -1,0 +1,1 @@
+https://raw.githubusercontent.com/simonkrenger/hr-schema-mysql/master/hr-schema-mysql.sql
