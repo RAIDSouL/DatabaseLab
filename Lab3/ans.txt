@@ -1,0 +1,26 @@
+1.
+SELECT last_name FROM employees where salary > 12000
+------------------
+2.
+SELECT last_name,job_title,salary 
+FROM employees 
+JOIN jobs ON jobs.job_id = employees.job_id
+WHERE salary NOT IN (2500,3500,700) AND jobs.job_title IN ("sales representative","stock clerk")
+-------------------
+3.
+SELECT employee_id,last_name,salary,(round(salary * 115.5/100,0)) AS new_salary,(round(salary * 0.155,0)) AS increse FROM employees WHERE 1
+-----------------
+4.
+SELECT jobs.job_title,
+round(MAX(employees.salary)) AS Maximum,
+round(MIN(employees.salary)) AS Minimum ,
+round(SUM(salary)) AS Sum,r
+ound(AVG(salary)) AS Average FROM employees,jobs where employees.job_id = jobs.job_id GROUP BY employees.job_id
+-----------------
+5.
+SELECT employee_id,last_name,salary 
+FROM employees,departments
+WHERE employees.salary > (SELECT AVG(salary) FROM employees,jobs WHERE employees.department_id = departments.department_id ) AND employees.department_id = departments.department_id
+ORDER BY salary ASC
+------------------
+6.SELECT department_id FROM departments EXCEPT SELECT department_id FROM job_history WHERE job_history.job_id = 'ST_CLERK' ORDER BY department_id
