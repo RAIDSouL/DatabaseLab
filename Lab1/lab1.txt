@@ -1,0 +1,53 @@
+261343 1/60 Lab 1
+
+q1
+SELECT fname
+FROM employee
+WHERE dno=5 
+
+q2
+SELECT fname, lname, bdate
+FROM employee
+WHERE (bdate BETWEEN '1960-01-01' AND '1969-12-31')
+
+q3
+SELECT ssn
+FROM employee
+WHERE address LIKE '%Houston%' 
+
+q4
+SELECT pname
+FROM project
+WHERE plocation NOT IN ('Bellaire','Houston','Stafford')
+
+q5
+SELECT fname, lname
+FROM employee
+WHERE super_ssn IS null
+
+q6
+SELECT fname, lname
+FROM employee, works_on
+WHERE ssn=essn
+AND pno=1
+AND hours>10
+
+q7
+SELECT fname, lname
+FROM employee, dependent
+WHERE fname=dependent_name
+
+q8
+SELECT fname, minit, lname
+FROM employee
+WHERE super_ssn = (SELECT ssn FROM employee WHERE fname = 'Franklin' AND lname = 'Wong')
+
+q9
+SELECT fname, lname, dname
+FROM employee, department
+WHERE mgr_ssn=ssn
+
+q10
+SELECT dname, dlocation
+FROM department, dept_locations
+WHERE department.dnumber=dept_locations.dnumber
