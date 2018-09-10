@@ -1,0 +1,41 @@
+1.
+SELECT last_name,hire_date 
+FROM employees
+WHERE (hire_date BETWEEN '1993-12-31' AND '1995-01-01')
+---------------------------
+2.
+SELECT CURRENT_DATE as date
+----------------------------
+3.	
+SELECT 
+last_name, 
+CURRENT_DATE, 
+hire_date, 
+timestampdiff(month,hire_date,CURRENT_DATE) AS MONTH_WORKED
+FROM employees
+--------------------------------
+4.
+SELECT	
+last_name,
+job_title,
+department_id as department_number,
+department_name  
+FROM employees 
+	JOIN jobs USING (job_id) 
+    JOIN departments USING (department_id) 
+    JOIN locations USING (location_id)
+WHERE city = "Toronto"
+WHERE locations.city = "Toronto"
+---------------------------------
+5
+SELECT
+    employee_id as Employee_id,
+    (SELECT jobs.job_title FROM jobs WHERE jobs.job_id = job_history.job_id) as Previous_job,
+    job_history.start_date as Start,
+    job_history.end_date as End,
+    jobs.job_title as Current_job
+FROM employees
+JOIN jobs USING (job_id)
+JOIN job_history USING (employee_id) 
+WHERE employee_id = job_history.employee_id 
+AND jobs.job_id != job_history.job_id
