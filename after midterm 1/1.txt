@@ -1,0 +1,57 @@
+a1
+CREATE TABLE products2(id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+ 	name VARCHAR(255) NOT NULL,
+ 	price FLOAT NOT NULL,
+ 	detail JSON,
+    CHECK (JSON_VALID(detail)));
+
+---------------------------------------------------------------------
+a2
+INSERT INTO products VALUES(
+    202,
+    'Air Purifier',
+    8900,
+    '{"color": "white", "manufactured by": "Mi", "height": "73.5 cm", "width": "26 cm", "depth": "26 cm", "work on": "240V" }'
+    );
+---------------------------------------------------------------------
+a3
+SELECT * FROM products WHERE JSON_VALUE(detail, '$.work on')
+-----------------------------------------------------------------------
+a4
+UPDATE products SET detail = JSON_REPLACE(detail, '$.color', 'white , red , blue , black') WHERE JSON_VALUE(detail, '$.color') = 'white';
+-----------------------------------------------------------------------
+b1
+CREATE TABLE students(
+    id VARCHAR(9) NOT NULL PRIMARY KEY,
+    name VARCHAR(100),
+    gender ENUM('male','female')
+);
+------------------------------------------------------------------------
+b2
+INSERT INTO students VALUES(
+    140876313,
+    'John',
+    'male');
+
+INSERT INTO students VALUES(
+    140876314,
+    'Marry',
+    'female');
+
+INSERT INTO students VALUES(
+    140876315,
+    'Robert',
+    'male');
+--------------------------------------------------------------------------
+b3
+INSERT INTO students (id,name) VALUES(
+    140876999,
+    'Tom'
+);
+------------------------------------------------------------------------
+b4
+เพราะค่า index ของ value ( female ) = 2 
+----------------------------------------------------------------------
+b5
+SELECT * FROM `students` ORDER BY `students`.`gender` DESC
+----------------------------------------------------------------------
